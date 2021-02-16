@@ -7,13 +7,9 @@ export const PROFILE_FETCHING = "PROFILE_FETCHING";
 export const PROFILE_SUCCESS = "PROFILE_SUCCESS";
 export const PROFILE_FAILED = "PROFILE_FAILED";
 
-export const KIOSK_FETCHING = "KIOSK_FETCHING";
-export const KIOSK_SUCCESS = "KIOSK_SUCCESS";
-export const KIOSK_FAILED = "KIOSK_FAILED";
-
-export const RESETPASSWORD_FETCHING = "RESETPASSWORD_FETCHING";
-export const RESETPASSWORD_SUCCESS = "RESETPASSWORD_SUCCESS";
-export const RESETPASSWORD_FAILED = "RESETPASSWORD_FAILED";
+export const REGISTER_FAILED = "REGISTER_FAILED";
+export const REGISTER_FETCHING = "REGISTER_FETCHING";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 
 export const apiUrl = process.env.REACT_APP_API_URL;
 export const imageUrl = "";
@@ -23,14 +19,13 @@ export const NO = "NO";
 export const OK = "ok";
 export const NOK = "nok";
 
-export const LOGIN_STATUS = "LOGIN_STATUS";
+export const IS_REGISTER = "IS_REGISTER";
+export const DISPLAY_NAME = "DISPLAY_NAME";
 
 export const server = {
-  LOGIN_URL: `login`,
-  LIST_KIOSK_URL: `kiosk`,
-  PROFILE_URL: `profile`,
-  LOGIN_PASSED: `yes`,
-  RESET_PASSWORD_URL: `resetpassword`
+  IS_REGISTER_URL: `isRegister`,
+  REGISTER_URL: `register`,
+  PROFILE_URL: `profile`
 };
 
 // Error Code

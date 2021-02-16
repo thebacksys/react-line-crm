@@ -11,7 +11,7 @@ import {
   Link
 } from "@material-ui/core";
 
-import * as loginActions from "./../../actions/login.action";
+import * as registerActions from "./../../actions/register.action";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "@material-ui/lab/Alert";
 
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Login(props) {
+export default function Register(props) {
   const classes = useStyles();
   const [account, setAccount] = React.useState({
     username: "",
@@ -40,7 +40,7 @@ export default function Login(props) {
     <Card className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={`${process.env.PUBLIC_URL}/images/authen_header.jpg`}
+        image={`https://www.iphouses.com/assets/brands/img/hygiene/banner/logo-hygiene.png`}
         title="Contemplative Reptile"
       />
       <CardContent>
@@ -52,7 +52,7 @@ export default function Login(props) {
           noValidate
           onSubmit={e => {
             e.preventDefault();
-            dispatch(loginActions.login({ ...account, ...props }));
+            dispatch(registerActions.login({ ...account, ...props }));
           }}
         >
           <TextField

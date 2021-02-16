@@ -1,8 +1,7 @@
 import {
-  LOGIN_FAILED,
-  LOGIN_FETCHING,
-  LOGIN_SUCCESS,
-  LOGOUT
+  REGISTER_FAILED,
+  REGISTER_FETCHING,
+  REGISTER_SUCCESS
 } from "./../Constants";
 
 const initialState = {
@@ -13,14 +12,12 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case LOGIN_FETCHING:
+    case REGISTER_FETCHING:
       return { ...state, isFetching: true, error: false, result: payload };
-    case LOGIN_FAILED:
+    case REGISTER_FAILED:
       return { ...state, isFetching: false, error: true, result: payload };
-    case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
       return { ...state, isFetching: false, error: false, result: payload };
-    case LOGOUT:
-      return initialState;
     default:
       return state;
   }
