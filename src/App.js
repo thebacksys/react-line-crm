@@ -25,6 +25,19 @@ const SecuredRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+const RegisterRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      registerActions.isRegister() ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/register" />
+      )
+    }
+  />
+);
+
 export default function App() {
   return (
     <>
@@ -32,6 +45,7 @@ export default function App() {
         <main>
           <Container style={{ display: "flex", justifyContent: "center" }}>
             <Switch>
+              <RegisterRoute path="/register" component={Register} />
               <SecuredRoute path="/home" component={Home} />
               <Route path="/register" component={Register} />
               <Route
