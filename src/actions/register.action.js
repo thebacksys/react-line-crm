@@ -30,23 +30,7 @@ export const register = ({
   address,
   history
 }) => {
-  return dispatch => {};
-};
-
-export const isRegister = () => {
-  liff.init(
-    { liffId: `1655673351-zR2WKaj5` },
-    data => {
-      localStorage.setItem(IS_REGISTER, false);
-      localStorage.setItem(DISPLAY_NAME, data.displayName);
-      console.log(data);
-      console.log("init line success");
-    },
-    err => {
-      localStorage.setItem(IS_REGISTER, false);
-      console.log("init line error");
-    }
-  );
-  const isRegisterStatus = localStorage.getItem(IS_REGISTER);
-  return isRegisterStatus === true;
+  return dispatch => {
+    dispatch(setStateToSuccess("ok"));
+  };
 };

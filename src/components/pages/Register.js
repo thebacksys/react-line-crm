@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
+import liff from "@line/liff";
+
 import {
   Card,
   CardContent,
@@ -29,6 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Register(props) {
   const classes = useStyles();
+
   const [account, setAccount] = React.useState({
     fullname: "",
     mobile: "",
@@ -36,6 +39,33 @@ export default function Register(props) {
     email: "",
     address: ""
   });
+
+  React.useEffect(() => {
+    liff
+      .init({
+        liffId: "1655673351-zR2WKaj5" // Use own liffId
+      })
+      .then(() => {
+        if (liff.isLoggedIn()) {
+          liff
+            .getProfile()
+            .then(profile => {
+              setAccount({
+                ...account,
+                fullname: account.fullname + profile.displayName
+              });
+            })
+            .catch(err => {
+              console.log("error", err);
+            });
+        } else {
+          // liff.login();
+        }
+      })
+      .catch(err => {
+        console.log(err.code, err.message);
+      });
+  }, []);
 
   const dispatch = useDispatch();
   const registerReducer = useSelector(({ registerReducer }) => registerReducer);
@@ -56,6 +86,7 @@ export default function Register(props) {
           onSubmit={e => {
             e.preventDefault();
             dispatch(registerActions.register({ ...account, ...props }));
+            liff.closeWindow();
           }}
         >
           <TextField
@@ -72,7 +103,6 @@ export default function Register(props) {
             }}
             id="fullname"
             label="ชื่อ-นามสกุล"
-            autoFocus
           />
           <TextField
             variant="outlined"

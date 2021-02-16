@@ -10,20 +10,7 @@ import {
   Switch
 } from "react-router-dom";
 
-import * as registerActions from "./actions/register.action";
-
-const SecuredRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      registerActions.isRegister() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/register" />
-      )
-    }
-  />
-);
+import { isRegister } from "./actions/register.action";
 
 export default function App() {
   return (
@@ -32,8 +19,7 @@ export default function App() {
         <main>
           <Container style={{ display: "flex", justifyContent: "center" }}>
             <Switch>
-              <Route path="/register" component={Register} />
-              <SecuredRoute path="/" component={Home} />
+              <Route path="/" component={Register} />
             </Switch>
           </Container>
         </main>
