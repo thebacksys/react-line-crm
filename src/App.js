@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "@material-ui/core";
-import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
+import Home from "./components/pages/Home";
 
 import {
   BrowserRouter as Router,
@@ -9,54 +10,34 @@ import {
   Switch
 } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
-import * as loginActions from "./actions/login.action";
+import * as registerActions from "./actions/register.action";
 
-// Protected Route
 const SecuredRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      // ternary condition
-      loginActions.isLoggedIn() ? (
+      registerActions.isRegister() ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/login" />
+        <Redirect to="/register" />
       )
     }
   />
 );
 
-const LoginRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      // ternary condition
-      loginActions.isLoggedIn() ? <Redirect to="/home" /> : <Login {...props} />
-    }
-  />
-);
-
 export default function App() {
-  const dispatch = useDispatch();
-
-  React.useEffect(() => {
-    dispatch(loginActions.reLogin());
-  }, [dispatch]);
-
-  const loginReducer = useSelector(({ loginReducer }) => loginReducer);
-
   return (
     <>
       <Router>
         <main>
           <Container style={{ display: "flex", justifyContent: "center" }}>
             <Switch>
-              <LoginRoute path="/login" component={Login} />
+              <SecuredRoute path="/home" component={Home} />
+              <Route path="/register" component={Register} />
               <Route
                 exact={true}
                 path="/"
-                component={() => <Redirect to="/login" />}
+                component={() => <Redirect to="/register" />}
               />
             </Switch>
           </Container>
