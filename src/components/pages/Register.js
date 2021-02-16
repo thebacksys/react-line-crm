@@ -30,12 +30,15 @@ const useStyles = makeStyles(theme => ({
 export default function Register(props) {
   const classes = useStyles();
   const [account, setAccount] = React.useState({
-    username: "",
-    password: ""
+    fullname: "",
+    mobile: "",
+    customerCode: "",
+    email: "",
+    address: ""
   });
 
   const dispatch = useDispatch();
-  const loginReducer = useSelector(({ loginReducer }) => loginReducer);
+  const registerReducer = useSelector(({ registerReducer }) => registerReducer);
   return (
     <Card className={classes.root}>
       <CardMedia
@@ -52,7 +55,7 @@ export default function Register(props) {
           noValidate
           onSubmit={e => {
             e.preventDefault();
-            dispatch(registerActions.login({ ...account, ...props }));
+            dispatch(registerActions.register({ ...account, ...props }));
           }}
         >
           <TextField
@@ -60,16 +63,15 @@ export default function Register(props) {
             margin="normal"
             required
             fullWidth
-            value={account.username}
+            value={account.fullname}
             onChange={e => {
               setAccount({
                 ...account,
-                username: e.target.value
+                fullname: e.target.value
               });
             }}
-            id="username"
-            label="Username"
-            autoComplete="email"
+            id="fullname"
+            label="ชื่อ-นามสกุล"
             autoFocus
           />
           <TextField
@@ -77,22 +79,64 @@ export default function Register(props) {
             margin="normal"
             required
             fullWidth
-            value={account.password}
+            value={account.mobile}
             onChange={e => {
               setAccount({
                 ...account,
-                password: e.target.value
+                mobile: e.target.value
               });
             }}
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
+            name="mobile"
+            label="เบอร์โทรศัพท์"
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            value={account.customerCode}
+            onChange={e => {
+              setAccount({
+                ...account,
+                customerCode: e.target.value
+              });
+            }}
+            name="customerCode"
+            label="รหัสลูกค้า"
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            value={account.email}
+            onChange={e => {
+              setAccount({
+                ...account,
+                email: e.target.value
+              });
+            }}
+            name="email"
+            label="อีเมล"
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            value={account.address}
+            onChange={e => {
+              setAccount({
+                ...account,
+                address: e.target.value
+              });
+            }}
+            name="address"
+            label="ที่อยู่"
           />
 
-          {loginReducer.error && (
-            <Alert severity="error">{loginReducer.result}</Alert>
+          {registerReducer.error && (
+            <Alert severity="error">{registerReducer.result}</Alert>
           )}
 
           <Button
@@ -102,18 +146,9 @@ export default function Register(props) {
             color="primary"
             className={classes.submit}
           >
-            เข้าสู่ระบบ
+            SUBMIT
           </Button>
         </form>
-        <Link
-          component="button"
-          variant="body2"
-          onClick={() => {
-            props.history.push("/resetpassword");
-          }}
-        >
-          ขอรหัสผ่านใหม่
-        </Link>
       </CardContent>
     </Card>
   );
